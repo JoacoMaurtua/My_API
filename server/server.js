@@ -16,9 +16,7 @@ app.use(express.urlencoded({extended:true}));
 
 
 //RUTAS
-//app.use('/api',require()); // Rutas que se almacenaran en routes
-
-
+app.use('/api',require('./routes/user.routes')); // El inicio de la ruta
 
 
 
