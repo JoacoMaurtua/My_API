@@ -29,3 +29,7 @@ Content-Type: application/json
   "email":"stefanoquiroz@gmail.com",
   "password":"87654321"
 }
+
+
+### DELETE USERS
+DELETE http://localhost:8000/api/users/delete/612eee8fe5f5e7ee8c1e797b
