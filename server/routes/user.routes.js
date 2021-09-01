@@ -4,7 +4,7 @@ const express = require('express');
 
 const router = express();
 
-const {findUser,createUser, findSingleUser} = require('../controllers/user.controllers');
+const {findUser,createUser, findSingleUser, updateUser} = require('../controllers/user.controllers');
 
 //ruta para obtener el listado de usuarios
 router.get('/users',findUser); //http://localhost:8000/api/users
@@ -14,5 +14,8 @@ router.get('/user/:email',findSingleUser); //:(el atributo)
 
 //ruta para crear un usuario
 router.post('/users/new',createUser)
+
+//ruta para actualizar un usuario
+router.put('/users/update/:id',updateUser)
 
 module.exports = router;

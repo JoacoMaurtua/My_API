@@ -15,3 +15,17 @@ Content-Type: application/json
 
 ###GET SINGLE USER
 GET http://localhost:8000/api/user/stefanoquiroz@gmail.com
+
+
+
+### PUT USERS
+PUT http://localhost:8000/api/users/update/612eee8fe5f5e7ee8c1e797b
+Content-Type: application/json
+
+
+{
+  "nickName":"STEFOXXX",
+  "fullName":"Stefano Quiroz",
+  "email":"stefanoquiroz@gmail.com",
+  "password":"87654321"
+}

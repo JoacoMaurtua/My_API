@@ -32,5 +32,15 @@ const createUser = (req,res) =>{
         })
 }
 
-module.exports = {findUser,findSingleUser,createUser}; //exportar todas las funcionalidades
+//Acualizando un usuario
+const updateUser = (req,res) =>{
+    User.findOneAndUpdate({_id:req.params.id}, req.body, {new:true})       //1r arg-> hacer el match, 1do arg->objeto nuevo, 3r arg -> sobrescribe el objeto anterior
+    .then(result => res.json({data:result})) //result se carga con el objeto que se esta creando
+    .catch(error => {
+        res.json({error: error, message: "Could not update user"});
+        res.sendStatus(500); //error http
+    })
+}
+
+module.exports = {findUser,findSingleUser,createUser,updateUser}; //exportar todas las funcionalidades
 
