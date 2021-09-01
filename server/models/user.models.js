@@ -35,3 +35,8 @@ const UserSchema = new mongoose.Schema({
 const User = mongoose.model('Users',UserSchema);
 
 module.exports = User;
+
+
+//NOTAS:
+
+//Siempre _id nunca id

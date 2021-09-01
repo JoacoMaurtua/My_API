@@ -12,6 +12,16 @@ const findUser = (req, res) => {
         })
 }
 
+//Devolver un solo usuario en la bd
+const findSingleUser = (req,res) => {
+    User.findOne({email:req.params.email})
+        .then(result => res.json({data:result}))
+        .catch(error=>{
+            res.json({error: error,message:"User not found"});
+            res.sendStatus(404);
+        })
+}
+
 //Crear un nuevo usuario
 const createUser = (req,res) =>{
     User.create(req.body) //objeto que encapsula todas las propiedades de la entidad -> {key:value}
@@ -22,5 +32,5 @@ const createUser = (req,res) =>{
         })
 }
 
-module.exports = {findUser,createUser}; //exportar todas las funcionalidades
+module.exports = {findUser,findSingleUser,createUser}; //exportar todas las funcionalidades
 

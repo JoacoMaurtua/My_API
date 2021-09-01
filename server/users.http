@@ -5,9 +5,13 @@ GET http://localhost:8000/api/users
 POST http://localhost:8000/api/users/new
 Content-Type: application/json
 
+
 {
-  "nickName":"JoacoMaster",
-  "fullName":"Joaquin Maurtua",
-  "email":"joacomaurtua@gmail.com",
-  "password":"12345678"
+  "nickName":"StefoHardcore",
+  "fullName":"Stefano Quiroz",
+  "email":"stefanoquiroz@gmail.com",
+  "password":"87654321"
 }
+
+###GET SINGLE USER
+GET http://localhost:8000/api/user/stefanoquiroz@gmail.com
