@@ -1,2 +1,13 @@
 ### GET USERS
 GET http://localhost:8000/api/users
+
+### POST USERS
+POST http://localhost:8000/api/users/new
+Content-Type: application/json
+
+{
+  "nickName":"JoacoMaster",
+  "fullName":"Joaquin Maurtua",
+  "email":"joacomaurtua@gmail.com",
+  "password":"12345678"
+}
