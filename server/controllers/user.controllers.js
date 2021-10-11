@@ -50,7 +50,10 @@ const deleteUser = (req,res) =>{
         res.json({error: error, message: "Could not delete user"});
         res.sendStatus(202); //error http
     })
-}
+};
+
+
+
 
 module.exports = {findUser,findSingleUser,createUser,updateUser,deleteUser}; //exportar todas las funcionalidades
 
