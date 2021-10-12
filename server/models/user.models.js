@@ -33,20 +33,24 @@ const UserSchema = new mongoose.Schema({
     
   },
 
+  
+
 },{timestamps:true}) //timestamps es para saber la fecha y hora en la que se crea un nuevo user
 
-
-UserSchema.virtual('confirmPassword')
+//Comprueba que el password es igual al confirm password
+UserSchema.virtual('confirmPassword') // --> SOLO PARA REGISTER
   .get(() => this._confirmPassword)
   .set( value => this._confirmPassword = value);
 
+//Midleware para agregar otra validacion
 UserSchema.pre('validate', function(next){
   if(this.password !== this.confirmPassword){
     this.invalidate('confirmPassword', 'Password must match confirm password')
   };
-  next();
+  next(); //ejecuta el siguiente midleware
 });
 
+//Proceso de hasheo(encriptacion)
 UserSchema.pre('save', function(next){
   bcrypt.hash(this.password, 10)
       .then(hash=>{
@@ -55,6 +59,7 @@ UserSchema.pre('save', function(next){
       });
 });
 
+//NOTA: pre se ejecuta antes de que se ejecute otro metodo en otros archivos
 
 const User = mongoose.model('Users',UserSchema);
 

@@ -6,9 +6,13 @@ const app = express(); //Accede a la funcionalidad de express
 
 const PORT = 8000;
 
+const cookieParser = require('cookie-parser');
+
 //Para la conexion con la base de datos:
 const connectDB = require('./config/mongoDB.config');
 connectDB();
+
+app.use(cookieParser()); //Activar la cookie
 
 //MIDLEWARES PARA PODER HACER CONSULTAS POST
 app.use(express.json());

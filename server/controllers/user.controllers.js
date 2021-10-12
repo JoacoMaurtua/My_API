@@ -23,7 +23,7 @@ const findSingleUser = (req,res) => {
 }
 
 //Crear un nuevo usuario
-const createUser = (req,res) =>{
+const createUser = (req,res) =>{ //Register
     User.create(req.body) //objeto que encapsula todas las propiedades de la entidad -> {key:value}
         .then(result => res.json({data:result})) //result se carga con el objeto que se esta creando
         .catch(error => {
@@ -31,6 +31,7 @@ const createUser = (req,res) =>{
             res.sendStatus(500); //error http
         })
 }
+
 
 //Acualizando un usuario
 const updateUser = (req,res) =>{
@@ -51,6 +52,31 @@ const deleteUser = (req,res) =>{
         res.sendStatus(202); //error http
     })
 };
+
+//Login
+const login = (req,res) =>{
+    User.findOne({email:req.params.email})
+        .then(result => {
+            if(result === null){ //no esta el correo registrado en la db
+                res.json({error:true, msg:"Invalid login attemp"});
+            }
+            else{
+                bcrypt.compare(req.body.password, result.password) //comparamos el password ingresado con el password almacenado en la db
+                    .then(passwordIsValid =>{
+                        if(passwordIsValid){
+                            const payload = {
+                                _id:result._id,
+                                nickName:result.nickName,
+                                fullName:result.fullName,
+                                email:result.email
+                            }
+                            const jsonWebToken = jwt.sing(payload,)
+                        }
+                    })
+            }
+        })
+        .catch(err => res.json({error:err, msg:"Invalid login attemp"}))
+}
 
 
 
