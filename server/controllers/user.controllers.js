@@ -2,6 +2,12 @@
 
 const User = require('../models/user.models'); //importando Users
 
+const bcrypt = require('bcrypt') //hashear las passwords
+
+const jwt = require('jsonwebtoken');
+
+const {secret} = require('../config/JWT.config');
+
 //Devolver todos los usuarios de la bd
 const findUser = (req, res) => {
     User.find({})
@@ -55,24 +61,32 @@ const deleteUser = (req,res) =>{
 
 //Login
 const login = (req,res) =>{
-    User.findOne({email:req.params.email})
+    User.findOne({email:req.body.email})//correo que escribe el usuario
         .then(result => {
-            if(result === null){ //no esta el correo registrado en la db
+            if(result === null){ //no esta el objeto registrado en la db
                 res.json({error:true, msg:"Invalid login attemp"});
             }
-            else{
+            else{ //lo referente a la contraseña
                 bcrypt.compare(req.body.password, result.password) //comparamos el password ingresado con el password almacenado en la db
                     .then(passwordIsValid =>{
+                        //Si el password coincide con el de la db(hasheado)
                         if(passwordIsValid){
-                            const payload = {
+                            const payload = { //palabra estandarizada
                                 _id:result._id,
                                 nickName:result.nickName,
                                 fullName:result.fullName,
                                 email:result.email
                             }
-                            const jsonWebToken = jwt.sing(payload,)
+                            const jsonWebToken = jwt.sign(payload,secret) //convertirlo a una cookie
+                            res.cookie('usertoken', jsonWebToken, secret, {httpOnly:true}).json({
+                                message: 'Success',
+                                data: payload
+                            })
+                        }else{
+                            res.json({error:true, msg:'Invalid passwords'});
                         }
                     })
+                    .catch(err => res.json({error:err, msg:"Invalid login attemp"}));
             }
         })
         .catch(err => res.json({error:err, msg:"Invalid login attemp"}))

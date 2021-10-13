@@ -33,7 +33,6 @@ const UserSchema = new mongoose.Schema({
     
   },
 
-  
 
 },{timestamps:true}) //timestamps es para saber la fecha y hora en la que se crea un nuevo user
 
