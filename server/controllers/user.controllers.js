@@ -95,5 +95,5 @@ const login = (req,res) =>{
 
 
 
-module.exports = {findUser,findSingleUser,createUser,updateUser,deleteUser}; //exportar todas las funcionalidades
+module.exports = {findUser,findSingleUser,createUser,updateUser,deleteUser,login}; //exportar todas las funcionalidades
 

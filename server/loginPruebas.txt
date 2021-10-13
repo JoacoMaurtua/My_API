@@ -1,0 +1,7 @@
+{
+  "nickName":"StefoHardcore",
+  "fullName":"Stefano Quiroz",
+  "email":"stefanoquiroz@gmail.com",
+  "password":"87654321",
+  "confirmPassword":"87654321"
+}
